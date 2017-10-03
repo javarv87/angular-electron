@@ -2,26 +2,27 @@
   <h1>Electron Timer</h1>
   <div class="progress-wrapper" *ngIf="maxVal">
     <div class="text" *ngIf="!isFinished">
-      {{maxVal - currentVal | number: '1.1-1'}}s
+      {{maxVal - currentVal | number: '1.1-1'}}
     </div>
-    <div class="text" *ngIf="!isFinished">
+    <div class="text" *ngIf="isFinished">
       ding!
       <audio src="assets/chime.mp3"></audio>
     </div>
     <round-progress
-      [current]="currentVal"
+      [current]="current"
       [max]="maxVal"
       [radius]="100"
       [stroke]="25">
     </round-progress>
   </div>
   <div class="controls-wrapper">
-    <div *ngIf="isFinished">
-      <label for="seconds">Seconds</label>
-      <input type="text" id="seconds" [(ngModel)]="max" (keydown)="reset()">
+    <md-form-field class="example-full-width">
+      <input mdInput [(ngModel)]="max" (keydown)="reset()" placeholder="Number of Seconds">
+    </md-form-field>
+    <div>
+      <button md-raised-button color="primary" *ngIf="currentVal <= 0" (click)="start()">Start</button>
+      <button md-raised-button color="accent" *ngIf="!isFinished" (click)="finish()">Finish</button>
     </div>
-    <button *ngIf="currentVal <= 0" (click)="start()">Start</button>
-    <button *ngIf="!isFinished" (click)="finish()">Finish</button>
   </div>
 </main>
 

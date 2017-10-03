@@ -15,7 +15,7 @@ export class AppComponent {
   current = 0;
 
   start() {
-    const interval = Observable.interval(100)
+    const interval = Observable.interval(100);
     interval
       .takeWhile( _ => !this.isFinished)
       .do(i => this.current += 0.1)
