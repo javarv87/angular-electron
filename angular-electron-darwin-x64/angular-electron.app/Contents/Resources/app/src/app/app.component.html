@@ -1,0 +1,28 @@
+<main class="content">
+  <h1>Electron Timer</h1>
+  <div class="progress-wrapper" *ngIf="maxVal">
+    <div class="text" *ngIf="!isFinished">
+      {{maxVal - currentVal | number: '1.1-1'}}
+    </div>
+    <div class="text" *ngIf="isFinished">
+      ding!
+      <audio src="assets/chime.mp3"></audio>
+    </div>
+    <round-progress
+      [current]="current"
+      [max]="maxVal"
+      [radius]="100"
+      [stroke]="25">
+    </round-progress>
+  </div>
+  <div class="controls-wrapper">
+    <md-form-field class="example-full-width">
+      <input mdInput [(ngModel)]="max" (keydown)="reset()" placeholder="Number of Seconds">
+    </md-form-field>
+    <div>
+      <button md-raised-button color="primary" *ngIf="currentVal <= 0" (click)="start()">Start</button>
+      <button md-raised-button color="accent" *ngIf="!isFinished" (click)="finish()">Finish</button>
+    </div>
+  </div>
+</main>
+
